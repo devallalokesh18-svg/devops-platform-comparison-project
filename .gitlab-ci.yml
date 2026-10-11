@@ -1,0 +1,13 @@
+stages: [test, build]
+test:
+  image: python:3.12
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - pytest -q
+docker_build:
+  image: docker:27
+  stage: build
+  services: [docker:27-dind]
+  script:
+    - docker build -t student-devops-app .

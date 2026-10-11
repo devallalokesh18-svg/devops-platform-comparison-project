@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Student DevOps Task Manager</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header><div class="container"><span class="badge">DEVOPS PROJECT</span>
+<h1>Student DevOps Task Manager</h1><p>One application managed using GitHub, GitLab and Bitbucket.</p></div></header>
+<main class="container">
+<section class="card"><h2>Add a Task</h2>
+<form action="/add" method="post" class="add-form"><input name="title" placeholder="Enter a new task" required><button>Add Task</button></form></section>
+<section class="card"><div class="section-head"><h2>Project Tasks</h2><a href="/api/health" target="_blank">Health API</a></div>
+{% for task in tasks %}<div class="task"><div><strong>{{task.title}}</strong><small>Task #{{task.id}}</small></div>
+<div class="actions"><span class="status {{task.status|lower|replace(' ','-')}}">{{task.status}}</span>
+{% if task.status != "Done" %}<form action="/complete/{{task.id}}" method="post"><button class="secondary">Complete</button></form>{% endif %}</div></div>{% endfor %}
+</section>
+<section class="grid"><div><b>Git</b><span>Version control</span></div><div><b>CI/CD</b><span>Automation</span></div><div><b>Docker</b><span>Containers</span></div><div><b>Testing</b><span>Pytest</span></div></section>
+</main></body></html>

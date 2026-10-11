@@ -1,0 +1,13 @@
+image: python:3.12
+pipelines:
+  default:
+    - step:
+        name: Test
+        script:
+          - pip install -r requirements.txt
+          - pytest -q
+    - step:
+        name: Docker Build
+        services: [docker]
+        script:
+          - docker build -t student-devops-app .
